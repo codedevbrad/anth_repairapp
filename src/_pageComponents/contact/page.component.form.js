@@ -1,6 +1,6 @@
 
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment, useState } from 'react'
+import React , { Fragment, useState } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
 
@@ -180,10 +180,8 @@ function Form ( ) {
                     className="block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
                   />
                 </div>
-              </div>
-
-              <InputSelect />
-            
+              </div> 
+              
               <div className="sm:col-span-2">
                 <div className="flex justify-between">
                   <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
