@@ -6,7 +6,7 @@ const team = {
         labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco 
         laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor 
         in reprehenderit in voluptat`,
-      imageSrc: 'https://images.unsplash.com/photo-1606492775219-7babadc15e83?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1128&q=80',
+      imageSrc: 'https://res.cloudinary.com/dezoqwmss/image/upload/v1660388513/paid_work/2b86684d-b764-4992-8a03-69318478f9bd_m1ckmq.jpg',
       imageAlt: 'Printed photo of bag being tossed into the sky on top of grass.',
  }
 

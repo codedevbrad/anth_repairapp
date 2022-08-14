@@ -13,9 +13,9 @@ export default function Home() {
       <ComponentHero />
       <div className="max-7xl mx-auto lg:max-w-7xl">
           <ComponentServicesListSample />
-          <ComponentChecklist />
+          {/* <ComponentChecklist /> */}
           <ComponentTeam />
-          <ComponentFAQS />
+          {/* <ComponentFAQS /> */}
       </div>
     </div>
   )

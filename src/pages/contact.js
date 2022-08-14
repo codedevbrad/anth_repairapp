@@ -13,7 +13,7 @@ export default function Contact () {
       </Head>
 
       <ComponentForm />
-      <ComponentBusinessInfo />
+      { /* <ComponentBusinessInfo /> */ }
     </div>
   )
 }

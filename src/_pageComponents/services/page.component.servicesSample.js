@@ -20,15 +20,12 @@ export default function ComponentServicesList({ title = 'Services we provide' , 
 
                       <h3 className="text-lg font-medium">
                           <a href={action.href} className="focus:outline-none">
-                              {/* Extend touch target to entire panel */}
-                              <span className="absolute inset-0" aria-hidden="true" />
                               {action.title}
                           </a>
                       </h3>
 
-                      <p className="mt-2 text-md text-gray-500">
-                        Doloribus dolores nostrum quia qui natus officia quod et dolorem. Sit repellendus qui ut at blanditiis et
-                        quo et molestiae.
+                      <p className="mt-2 text-md text-gray-500 pr-7">
+                          { action.description }
                       </p>
 
                       <ul className="mt-5">
