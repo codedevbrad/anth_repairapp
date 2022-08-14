@@ -40,8 +40,7 @@ export default function ComponentServicesList({ title = 'Services we provide' , 
         </div>
 
         <h3 className="text-xl font-medium text-center pt-5">
-            <a href={ linkTo } className="focus:outline-none">
-                <span className="absolute inset-0" aria-hidden="true" />
+            <a href={ linkTo } className="focus:outline-none">  
                 View all of our services
             </a>
         </h3>

@@ -86,41 +86,45 @@ const encode = (data) => {
       .join("&");
 }
 
+class ContactForm extends React.Component {
 
-function FormComponent ( ) {
- 
-  const [ name  , setName ]  = useState('');
-  const [ email , setEmail ] = useState('');
-  const [ phone , setPhone ] = useState('');
-  const [ message , setMessage ] = useState('');
-  const [ foundThrough , setfoundThrough ] = useState();
+  constructor(props) {
+    super(props);
+    this.state = { 
+      name: "", email: "", message: "" , phone: "" , foundBy: ""
+    };
+  }
 
   /* Here’s the juicy bit for posting the form submission */
-  const handleSubmit = e => {
 
-    let formBody = { name , email , phone , message , foundThrough };
-    console.log( formBody );
+  handleSubmit = e => {
+      fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: encode({ "form-name": "contact", ...this.state })
+      })
+      .then(() => alert("Success!"))
+      .catch(error => alert(error));
 
-    fetch("/", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({ "form-name": "contact" , formBody })
-    })
-    .then(() => alert("Success!"))
-    .catch(error => console.log(error));
-    
-    e.preventDefault();
+      e.preventDefault();
+      console.log( this.state );
   };
 
-  return (
-       <form name="contact" method="POST" data-netlify="true"className="mt-9 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8" onSubmit={ ( ) => handleSubmit( ) }>
+  handleChange = e => this.setState({ [e.target.name]: e.target.value });
+
+  render() {
+
+    const { name , email , message , phone , foundBy } = this.state;
+
+    return (
+       <form name="contact" method="POST" data-netlify="true"className="mt-9 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8" onSubmit={this.handleSubmit}>
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700">
                   Your Full name
                 </label>
                 <div className="mt-1">
                   <input
-                    value={ name } onChange={ ( e ) => setName( e.target.value ) }
+                    value={ name } onChange={this.handleChange}
                     type="text"
                     name="name"
                     id="first-name"
@@ -136,7 +140,7 @@ function FormComponent ( ) {
                 </label>
                 <div className="mt-1">
                   <input
-                    value={ email } onChange={ ( e ) => setEmail( e.target.value ) }
+                    value={ email } onChange={this.handleChange}
                     id="email"
                     name="email"
                     type="email"
@@ -155,7 +159,7 @@ function FormComponent ( ) {
 
                 <div className="mt-1">
                   <input
-                    value={ phone } onChange={ ( e ) => setPhone( e.target.value ) }
+                    value={ phone } onChange={this.handleChange}
                     type="text"
                     name="phone"
                     id="phone"
@@ -177,7 +181,7 @@ function FormComponent ( ) {
                 </div>
                 <div className="mt-1">
                   <textarea
-                    value={message} onChange={ ( e ) => setMessage( e.target.value ) }
+                    value={message} onChange={this.handleChange}
                     id="how-can-we-help"
                     name="message"
                     aria-describedby="how-can-we-help-description"
@@ -189,15 +193,15 @@ function FormComponent ( ) {
               </div>
 
               <div className="sm:col-span-2">
-                <label htmlFor="how-did-you-hear-about-us" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="foundBy" className="block text-sm font-medium text-gray-700">
                   How did you hear about us?
                 </label>
                 <div className="mt-1">
                   <input
-                    value={ foundThrough } onChange={ ( e ) => setfoundThrough( e.target.value ) }
+                    value={ foundBy } onChange={this.handleChange}
                     type="text"
-                    name="how-did-you-hear-about-us"
-                    id="how-did-you-hear-about-us"
+                    name="foundBy"
+                    id="foundBy"
                     className="p-4 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
                   />
                 </div>
@@ -212,9 +216,9 @@ function FormComponent ( ) {
                 </button>
               </div>
       </form>
-  );
+    );
+  }
 }
-
 
 export default function ComponentForm( ) {
     return (
@@ -237,7 +241,7 @@ export default function ComponentForm( ) {
                 you! Send us a message using the form opposite, or email us.
               </p>
               
-              <FormComponent />
+              <ContactForm />
 
             </div>
           </div>
