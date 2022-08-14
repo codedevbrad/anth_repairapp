@@ -13,8 +13,8 @@ export default function ComponentServiceFittings({ title = 'set title' , showTit
                 
                   <div>
                         <p className="mt-2 text-md text-gray-500">
-                            Doloribus dolores nostrum quia qui natus officia quod et dolorem. Sit repellendus qui ut at blanditiis et
-                            quo et molestiae.
+                            {/* Doloribus dolores nostrum quia qui natus officia quod et dolorem. Sit repellendus qui ut at blanditiis et
+                            quo et molestiae. */}
                         </p>
                     </div>
 
