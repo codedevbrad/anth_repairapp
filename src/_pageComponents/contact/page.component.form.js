@@ -86,98 +86,60 @@ const encode = (data) => {
       .join("&");
 }
 
-class ContactForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { name: "", email: "", message: "" };
-  }
+
+function FormComponent ( ) {
+ 
+  const [ name  , setName ]  = useState('');
+  const [ email , setEmail ] = useState('');
+  const [ phone , setPhone ] = useState('');
+  const [ message , setMessage ] = useState('');
+  const [ foundThrough , setfoundThrough ] = useState();
 
   /* Here’s the juicy bit for posting the form submission */
+  const handleSubmit = e => {
 
-  handleSubmit = e => {
+    let formBody = { name , email , phone , message , foundThrough };
+    console.log( formBody );
+
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({ "form-name": "contact", ...this.state })
+      body: encode({ "form-name": "contact" , formBody })
     })
-      .then(() => alert("Success!"))
-      .catch(error => alert(error));
-
-    e.preventDefault();
+    .then(() => alert("Success!"))
+    .catch(error => console.log(error));
   };
 
-  handleChange = e => this.setState({ [e.target.name]: e.target.value });
-
-  render() {
-    const { name, email, message } = this.state;
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <p>
-          <label>
-            Your Name: <input type="text" name="name" value={name} onChange={this.handleChange} />
-          </label>
-        </p>
-        <p>
-          <label>
-            Your Email: <input type="email" name="email" value={email} onChange={this.handleChange} />
-          </label>
-        </p>
-        <p>
-          <label>
-            Message: <textarea name="message" value={message} onChange={this.handleChange} />
-          </label>
-        </p>
-        <p>
-          <button type="submit">Send</button>
-        </p>
-      </form>
-    );
-  }
-}
-
-function Form ( ) {
-
-    return (
-        <form name="contact" method="POST" data-netlify="true"className="mt-9 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8">
-           <div>
-                <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
-                  First name
+  return (
+       <form name="contact" method="POST" data-netlify="true"className="mt-9 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8" onSubmit={ ( ) => handleSubmit( ) }>
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+                  Your Full name
                 </label>
                 <div className="mt-1">
                   <input
+                    value={ name } onChange={ ( e ) => setName( e.target.value ) }
                     type="text"
-                    name="first-name"
+                    name="name"
                     id="first-name"
                     autoComplete="given-name"
-                    className="block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
+                    className="p-4 block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
                   />
-                </div>
+                </div> 
               </div>
-              <div>
-                <label htmlFor="last-name" className="block text-sm font-medium text-gray-700">
-                  Last name
-                </label>
-                <div className="mt-1">
-                  <input
-                    type="text"
-                    name="last-name"
-                    id="last-name"
-                    autoComplete="family-name"
-                    className="block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
-                  />
-                </div>
-              </div>
+
               <div className="sm:col-span-2">
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                  Email
+                  Your Email
                 </label>
                 <div className="mt-1">
                   <input
+                    value={ email } onChange={ ( e ) => setEmail( e.target.value ) }
                     id="email"
                     name="email"
                     type="email"
                     autoComplete="email"
-                    className="block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
+                    className="p-4 block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
                   />
                 </div>
               </div> 
@@ -185,28 +147,26 @@ function Form ( ) {
               <div className="sm:col-span-2">
                 <div className="flex justify-between">
                   <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
-                    Phone
+                    Your Phone number
                   </label>
-                  <span id="phone-description" className="text-sm text-gray-500">
-                    Optional
-                  </span>
                 </div>
 
                 <div className="mt-1">
                   <input
+                    value={ phone } onChange={ ( e ) => setPhone( e.target.value ) }
                     type="text"
                     name="phone"
                     id="phone"
                     autoComplete="tel"
                     aria-describedby="phone-description"
-                    className="block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
+                    className="p-4 block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
                   />
                 </div>
               </div>
 
               <div className="sm:col-span-2">
                 <div className="flex justify-between">
-                  <label htmlFor="how-can-we-help" className="block text-sm font-medium text-gray-700">
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-700">
                     How can we help you?
                   </label>
                   <span id="how-can-we-help-description" className="text-sm text-gray-500">
@@ -215,11 +175,12 @@ function Form ( ) {
                 </div>
                 <div className="mt-1">
                   <textarea
+                    value={message} onChange={ ( e ) => setMessage( e.target.value ) }
                     id="how-can-we-help"
-                    name="how-can-we-help"
+                    name="message"
                     aria-describedby="how-can-we-help-description"
                     rows={4}
-                    className="block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border border-gray-300 rounded-md"
+                    className="p-4 block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border border-gray-300 rounded-md"
                     defaultValue={''}
                   />
                 </div>
@@ -231,10 +192,11 @@ function Form ( ) {
                 </label>
                 <div className="mt-1">
                   <input
+                    value={ foundThrough } onChange={ ( e ) => setfoundThrough( e.target.value ) }
                     type="text"
                     name="how-did-you-hear-about-us"
                     id="how-did-you-hear-about-us"
-                    className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                    className="p-4 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
                   />
                 </div>
               </div>
@@ -248,7 +210,7 @@ function Form ( ) {
                 </button>
               </div>
       </form>
-    )
+  );
 }
 
 
@@ -259,7 +221,7 @@ export default function ComponentForm( ) {
           <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
             <img
               className="h-56 w-full object-cover lg:absolute lg:h-full"
-              src="https://images.unsplash.com/photo-1556761175-4b46a572b786?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1567&q=80"
+              src="https://res.cloudinary.com/dezoqwmss/image/upload/v1660388549/paid_work/22030957-f3f6-4d4c-8941-a90d22afb2f9_jkfnv2.jpg"
               alt=""
             />
           </div>
@@ -273,7 +235,7 @@ export default function ComponentForm( ) {
                 you! Send us a message using the form opposite, or email us.
               </p>
               
-              <ContactForm />
+              <FormComponent />
 
             </div>
           </div>
