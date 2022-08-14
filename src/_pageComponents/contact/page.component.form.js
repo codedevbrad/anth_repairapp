@@ -108,6 +108,8 @@ function FormComponent ( ) {
     })
     .then(() => alert("Success!"))
     .catch(error => console.log(error));
+    
+    e.preventDefault();
   };
 
   return (
