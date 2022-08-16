@@ -12,8 +12,9 @@ export default function Contact () {
         <meta name="description" content="UPCV repairs windows and doors" />
       </Head>
 
-      <ComponentForm />
-      { /* <ComponentBusinessInfo /> */ }
+      <ComponentForm /> 
     </div>
   )
 }
+
+

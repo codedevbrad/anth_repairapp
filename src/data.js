@@ -1,9 +1,11 @@
 
+
 export const businessData = {
-    companyName: 'UPCV repairs windows and doors',
-        licence: '2022 UPCV repairs windows and doors', 
+    companyName: 'UPVC repairs windows and doors',
+        licence: '2022 UPVC repairs windows and doors', 
       trademark: 'UPVCwindowsanddoors is a trading name of UPVC WINDOW AND DOOR REPAIRS LIMITED and is a credit broker, not a lender.',
-}
+        contact: '07899 065 547'
+    }
 
 
 export const pageLinks = [

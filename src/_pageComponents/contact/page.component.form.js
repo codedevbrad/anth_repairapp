@@ -1,8 +1,13 @@
 
 /* This example requires Tailwind CSS v2.0+ */
-import React , { Fragment, useState } from 'react'
-import { Listbox, Transition } from '@headlessui/react'
-import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
+import React , { Fragment, useState } from 'react';
+import { Listbox, Transition } from '@headlessui/react';
+import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
+
+import { getURL } from '../../utils/getSiteURL';
+
+import { businessData } from '../../data';
+ 
 
 const people = [
   { id: 1, name: 'a' },
@@ -80,44 +85,59 @@ function InputSelect() {
   )
 }
 
-const encode = (data) => {
-  return Object.keys(data)
-      .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-      .join("&");
-}
+
+// const encode = (data) => {
+//   return Object.keys(data)
+//       .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+//       .join("&");
+// }
+
 
 class ContactForm extends React.Component {
 
   constructor(props) {
-    super(props);
-    this.state = { 
-      name: "", email: "", message: "" , phone: "" , foundBy: ""
-    };
+      super(props);
+      this.state = { 
+        name: "", email: "", message: "" , phone: "" , foundBy: ""
+      };
   }
 
-  /* Here’s the juicy bit for posting the form submission */
+  clearFORM = e => this.setState({ name: "", email: "", message: "" , phone: "" , foundBy: "" });
+
 
   handleSubmit = e => {
-      fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: encode({ "form-name": "contact", ...this.state })
-      })
-      .then(() => alert("Success!"))
-      .catch(error => alert(error));
+    let url = getURL();
+    console.log( url );
+    fetch( url , {
+      method: "POST" ,
+      body: JSON.stringify( this.state )
+    })
+    .then( ( response ) => response.json( ) )
+    .then(( data ) => {
+        console.log( data );
+        if ( data.code == 200 ) {
+            alert(`your email has been sent. we'll get right back to you.`);
+        } else {
+            alert(`your email could not be sent.`);
+        }
+    }) 
+    .catch(error => {
+         alert(error)
+    });
 
-      e.preventDefault();
-      console.log( this.state );
-  };
+    e.preventDefault(); 
+    this.clearFORM();
+};
 
-  handleChange = e => this.setState({ [e.target.name]: e.target.value });
+
+  handleChange = e => this.setState({ [ e.target.name ] : e.target.value });
 
   render() {
 
     const { name , email , message , phone , foundBy } = this.state;
 
     return (
-       <form name="contact" method="POST" data-netlify="true"className="mt-9 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8" onSubmit={this.handleSubmit}>
+       <form name="contact" className="mt-9 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8" onSubmit={this.handleSubmit}>
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700">
                   Your Full name
@@ -125,6 +145,7 @@ class ContactForm extends React.Component {
                 <div className="mt-1">
                   <input
                     value={ name } onChange={this.handleChange}
+                    required
                     type="text"
                     name="name"
                     id="first-name"
@@ -160,6 +181,7 @@ class ContactForm extends React.Component {
                 <div className="mt-1">
                   <input
                     value={ phone } onChange={this.handleChange}
+                    required
                     type="text"
                     name="phone"
                     id="phone"
@@ -182,6 +204,7 @@ class ContactForm extends React.Component {
                 <div className="mt-1">
                   <textarea
                     value={message} onChange={this.handleChange}
+                    required
                     id="how-can-we-help"
                     name="message"
                     aria-describedby="how-can-we-help-description"
@@ -237,8 +260,9 @@ export default function ComponentForm( ) {
             <div className="max-w-md mx-auto sm:max-w-lg lg:mx-0">
               <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl"> Get in contact </h2>
               <p className="mt-4 text-lg text-gray-500 sm:mt-3">
-                We’d love to hear from you! Send us a message using the form opposite, or email us. We’d love to hear from
-                you! Send us a message using the form opposite, or email us.
+                Send us a message using our form or phone us on 
+                 <span className="text-blue-600 font-bold"> { businessData.contact } </span>. 
+                 We’d love to hear from you. 
               </p>
               
               <ContactForm />

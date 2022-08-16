@@ -14,7 +14,7 @@ export default function ComponentServicesList({ title = 'Services we provide' , 
 
         <div className="p-6 rounded-lg overflow-hidden shadow-lg divide-y divide-gray-200 sm:divide-y-0 sm:grid sm:grid-cols-2 sm:gap-px">
             { servicesPage.map((action, actionIdx) => (
-                <div>
+                <div key={ actionIdx }>
 
                   <div className="mt-8">
 
@@ -29,8 +29,8 @@ export default function ComponentServicesList({ title = 'Services we provide' , 
                       </p>
 
                       <ul className="mt-5">
-                          { action.sub.map( ( subItem ) =>
-                              <li className="mb-3 text-md text-gray-500"> { subItem } </li>
+                          { action.sub.map( ( subItem , index  ) =>
+                              <li className="mb-3 text-md text-gray-500" key={ index }> { subItem } </li>
                           )}
                       </ul>
                       
