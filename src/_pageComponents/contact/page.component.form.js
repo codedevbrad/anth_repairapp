@@ -123,7 +123,7 @@ class ContactForm extends React.Component {
       }
     })
     .then( ( response ) => response.json( ) )
-    .then(( data ) => {
+    .then( ( data ) => {
         console.log( data );
         if ( data.code == 200 ) {
             alert(`your email has been sent. we'll get right back to you.`);
@@ -132,14 +132,16 @@ class ContactForm extends React.Component {
         }
     }) 
     .catch(error => {
-         console.log('error' , error );
+        console.log('error' , error );
     });
 
     e.preventDefault(); 
-    // this.clearFORM();
+    this.clearFORM();
   };
 
+
   handleChange = e => this.setState({ [ e.target.name ] : e.target.value });
+
 
   render() {
 

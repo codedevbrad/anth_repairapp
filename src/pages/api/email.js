@@ -4,18 +4,18 @@ const client = require('@sendgrid/mail');
 client.setApiKey( process.env.sendgrid_key );
 
 
-const sendEmail = ( { name , email , message , phone , foundBy } ) => new Promise( async ( resolve , reject ) => {
+const sendEmail = ( { name , email , message , phone  , foundBy } ) => new Promise( async ( resolve , reject ) => {
 
   const msg = {
-      to:      'brad@upvcwindowanddoorrepairs.co.uk', // Change to your recipient
-      from:    'codedevbrad@gmail.com', // Change to your verified sender
+      to:      'info@upvcwindowanddoorrepairs.co.uk', // Change to your recipient
+      from:    'brad@upvcwindowanddoorrepairs.co.uk', // Change to your verified sender
       subject: 'New contact form submission (test)',
       html:    `
-          Name : ${ name || 'not set' } , 
-          Email : ${ email } , 
-          Phone Number : ${ phone } , 
-          Message : ${ message } , 
-          Found website through : ${ foundBy }
+          Name : ${ name || 'not given' } , 
+          Email : ${ email || 'not given' } , 
+          Phone Number : ${ phone || 'not given' } , 
+          Message : ${ message || 'not given' } , 
+          Found website through : ${ foundBy || 'not given' }
       `,
   }
 
@@ -41,7 +41,7 @@ export default async function handler(req, res) {
         }
         catch ( err ) {
             console.log( 'hit error handler' , err.code );
-            res.status( 500 ).json({ response: err , code: err.code , key: process.env.sendgrid_key });
+            res.status( 500 ).json({ response: err , code: err.code });
         }
     } 
     else {
