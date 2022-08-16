@@ -105,15 +105,19 @@ class ContactForm extends React.Component {
   clearFORM = e => this.setState({ name: "", email: "", message: "" , phone: "" , foundBy: "" });
 
   handleSubmit = e => {
-    let url = getURL();
-    console.log( 'url: ' , url );
-    fetch( `${ url }/api/email` , {
+
+    console.log( 'url: ' , `/api/email`  );
+
+    fetch( `/api/email` , {
       method: "POST" ,
       body: JSON.stringify( this.state )
     })
     .then( ( res ) => {
       if ( !res.ok ) {  
         throw new Error( "Not 2xx response", { cause: res } );
+      }
+      else {
+        return res;
       }
     })
     .then( ( response ) => response.json( ) )
@@ -138,8 +142,7 @@ class ContactForm extends React.Component {
   render() {
 
     const { name , email , message , phone , foundBy } = this.state;
-    
-    console.log( 'url: ' , process.env.NODE_ENV );
+     
 
     return (
        <form name="contact" className="mt-9 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8" onSubmit={this.handleSubmit}>
