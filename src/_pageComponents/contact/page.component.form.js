@@ -111,6 +111,11 @@ class ContactForm extends React.Component {
       method: "POST" ,
       body: JSON.stringify( this.state )
     })
+    .then( ( res ) => {
+      if ( !res.ok ) {  
+        throw new Error( "Not 2xx response", { cause: res } );
+      }
+    })
     .then( ( response ) => response.json( ) )
     .then(( data ) => {
         console.log( data );
@@ -121,14 +126,12 @@ class ContactForm extends React.Component {
         }
     }) 
     .catch(error => {
-         console.log(error);
+         console.log('error' , error );
     });
 
     e.preventDefault(); 
     this.clearFORM();
-    
-    console.log( 'url: ' , url );
-};
+  };
 
 
   handleChange = e => this.setState({ [ e.target.name ] : e.target.value });
@@ -211,7 +214,6 @@ class ContactForm extends React.Component {
                     aria-describedby="how-can-we-help-description"
                     rows={4}
                     className="p-4 block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border border-gray-300 rounded-md"
-                    defaultValue={''}
                   />
                 </div>
               </div>
