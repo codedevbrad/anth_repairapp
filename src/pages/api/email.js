@@ -24,8 +24,8 @@ const sendEmail = ( {
   }
 
   client.send( msg )
-        .then( ( data ) => resolve({ successCode: 200 }) )
-        .catch( ( err ) => reject({  successCode: 500 }) );
+        .then( ( data ) => resolve({ successCode: 200 , msg: data }) )
+        .catch( ( err ) => reject({  successCode: 500 , msg: err  , key: process.env.sendgrid_key  }) );
 });
 
 
