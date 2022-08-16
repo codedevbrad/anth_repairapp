@@ -106,15 +106,17 @@ class ContactForm extends React.Component {
 
   handleSubmit = e => {
     let url = getURL();
-    console.log( 'url: ' , url );
+    console.log( 'url: ' , url , process.env.NODE_ENV );
     fetch( `${ url }/api/email` , {
       method: "POST" ,
       body: JSON.stringify( this.state )
     })
     .then( ( res ) => {
-      if ( !res.ok ) {  
-        throw new Error( "Not 2xx response", { cause: res } );
-      }
+        if ( !res.ok ) {  
+          throw new Error( "Not 2xx response", { cause: res } );
+        } else {
+          return res;
+        }
     })
     .then( ( response ) => response.json( ) )
     .then(( data ) => {
