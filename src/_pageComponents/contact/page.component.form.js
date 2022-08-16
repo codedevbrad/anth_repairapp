@@ -110,14 +110,13 @@ class ContactForm extends React.Component {
 
     console.log( 'url: ' , `/api/email`  );
 
-    fetch( `https://jolly-pixie-7a2217.netlify.app/api/email` , {
+    fetch( `/api/email` , {
       method: "POST" ,
       body: JSON.stringify( this.state )
     })
     .then( ( res ) => {
       if ( !res.ok ) {  
-        console.log( res );
-        throw new Error( "Not 2xx response", { cause: res } );
+        throw new Error( res );
       }
       else {
         return res;
@@ -137,7 +136,7 @@ class ContactForm extends React.Component {
     });
 
     e.preventDefault(); 
-    this.clearFORM();
+    // this.clearFORM();
   };
 
   handleChange = e => this.setState({ [ e.target.name ] : e.target.value });

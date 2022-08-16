@@ -4,12 +4,7 @@ const client = require('@sendgrid/mail');
 client.setApiKey( process.env.sendgrid_key );
 
 
-const sendEmail = ( { 
-
-  name = 'wasnt set' , email = 'wasnt set' , message = 'wasnt set' , phone = 'wasnt set' , foundBy = 'wasnt set' 
-
-} 
-) => new Promise( ( resolve , reject ) => {
+const sendEmail = ({ name , email , message , phone , foundBy } ) => new Promise( async ( resolve , reject ) => {
   const msg = {
       to:      'brad@upvcwindowanddoorrepairs.co.uk', // Change to your recipient
       from:    'codedevbrad@gmail.com', // Change to your verified sender
@@ -23,9 +18,15 @@ const sendEmail = ( {
       `,
   }
 
-  client.send( msg )
-        .then( ( data ) => resolve({ successCode: 200 , msg: data }) )
-        .catch( ( err ) => reject({  successCode: 500 , msg: err  , key: process.env.sendgrid_key  }) );
+  await client.send( msg )
+        .then( ( data ) => {
+            console.log( 'hit then handler' );
+            resolve({ code: 200 }) 
+        })
+        .catch( ( err ) => {
+            console.log( 'catch block' );
+            reject({ code: err.code , reason: err.message });
+        });
 });
 
 
@@ -33,16 +34,18 @@ export default async function handler(req, res) {
     if (req.method === 'POST') {
         try {
             let emailData = JSON.parse( req.body );
-            let { successCode } = await sendEmail( emailData );
-            res.status( successCode ).send({ code: successCode } );
+            // let body = { name: 'wasnt set' , email: 'wasnt set' , message: 'wasnt set' , phone: 'wasnt set' , foundBy: 'wasnt set' }
+            let { code } = await sendEmail( body );
+            console.log('runs after email send')
+            res.status( successCode ).send( code );
         }
-        catch ( err ) {
-            console.log( err );
-            res.status( 500 ).send( err );
+        catch ( {code , reason }  ) {
+            console.log( 'hit error handler' );
+            res.status( code ).send( reason );
         }
     } 
     else {
         // Handle any other HTTP method
-        res.status(200).json({ name: 'get' });
+        res.status(200).send('somewhere');
     }
 }
