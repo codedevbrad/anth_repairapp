@@ -133,12 +133,13 @@ class ContactForm extends React.Component {
     this.clearFORM();
   };
 
-
   handleChange = e => this.setState({ [ e.target.name ] : e.target.value });
 
   render() {
 
     const { name , email , message , phone , foundBy } = this.state;
+    
+    console.log( 'url: ' , url ), process.env.NODE_ENV ;
 
     return (
        <form name="contact" className="mt-9 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8" onSubmit={this.handleSubmit}>
