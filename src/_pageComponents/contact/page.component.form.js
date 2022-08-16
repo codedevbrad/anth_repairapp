@@ -107,8 +107,8 @@ class ContactForm extends React.Component {
 
   handleSubmit = e => {
     let url = getURL();
-    console.log( url );
-    fetch( url , {
+    console.log( 'url: ' , url );
+    fetch( `${ url }/api/email` , {
       method: "POST" ,
       body: JSON.stringify( this.state )
     })
