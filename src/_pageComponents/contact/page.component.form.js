@@ -102,18 +102,21 @@ class ContactForm extends React.Component {
       };
   }
 
+
   clearFORM = e => this.setState({ name: "", email: "", message: "" , phone: "" , foundBy: "" });
+  
 
   handleSubmit = e => {
 
     console.log( 'url: ' , `/api/email`  );
 
-    fetch( `/api/email` , {
+    fetch( `https://jolly-pixie-7a2217.netlify.app/api/email` , {
       method: "POST" ,
       body: JSON.stringify( this.state )
     })
     .then( ( res ) => {
       if ( !res.ok ) {  
+        console.log( res );
         throw new Error( "Not 2xx response", { cause: res } );
       }
       else {
