@@ -104,7 +104,6 @@ class ContactForm extends React.Component {
 
   clearFORM = e => this.setState({ name: "", email: "", message: "" , phone: "" , foundBy: "" });
 
-
   handleSubmit = e => {
     let url = getURL();
     console.log( 'url: ' , url );
@@ -127,6 +126,8 @@ class ContactForm extends React.Component {
 
     e.preventDefault(); 
     this.clearFORM();
+    
+    console.log( 'url: ' , url );
 };
 
 
