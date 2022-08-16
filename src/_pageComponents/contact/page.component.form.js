@@ -116,7 +116,7 @@ class ContactForm extends React.Component {
     })
     .then( ( res ) => {
       if ( !res.ok ) {  
-        throw new Error( res );
+        return res.text().then(text => { throw new Error(text) })
       }
       else {
         return res;

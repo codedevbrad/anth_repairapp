@@ -4,13 +4,14 @@ const client = require('@sendgrid/mail');
 client.setApiKey( process.env.sendgrid_key );
 
 
-const sendEmail = ({ name , email , message , phone , foundBy } ) => new Promise( async ( resolve , reject ) => {
+const sendEmail = ( { name , email , message , phone , foundBy } ) => new Promise( async ( resolve , reject ) => {
+
   const msg = {
       to:      'brad@upvcwindowanddoorrepairs.co.uk', // Change to your recipient
       from:    'codedevbrad@gmail.com', // Change to your verified sender
       subject: 'New contact form submission (test)',
       html:    `
-          Name : ${ name } , 
+          Name : ${ name || 'not set' } , 
           Email : ${ email } , 
           Phone Number : ${ phone } , 
           Message : ${ message } , 
@@ -24,8 +25,8 @@ const sendEmail = ({ name , email , message , phone , foundBy } ) => new Promise
             resolve({ code: 200 }) 
         })
         .catch( ( err ) => {
-            console.log( 'catch block' );
-            reject({ code: err.code , reason: err.message });
+            console.log( 'catch block' , err );
+            reject( err );
         });
 });
 
@@ -34,14 +35,13 @@ export default async function handler(req, res) {
     if (req.method === 'POST') {
         try {
             let emailData = JSON.parse( req.body );
-            // let body = { name: 'wasnt set' , email: 'wasnt set' , message: 'wasnt set' , phone: 'wasnt set' , foundBy: 'wasnt set' }
-            let { code } = await sendEmail( body );
-            console.log('runs after email send')
-            res.status( successCode ).send( code );
+            let data = await sendEmail( emailData );
+            console.log('runs after email send' , data );
+            res.status( 200 ).send( { code : 200 } );
         }
-        catch ( {code , reason }  ) {
-            console.log( 'hit error handler' );
-            res.status( code ).send( reason );
+        catch ( err ) {
+            console.log( 'hit error handler' , err.code );
+            res.status( 500 ).json({ response: err , code: err.code , key: process.env.sendgrid_key });
         }
     } 
     else {
