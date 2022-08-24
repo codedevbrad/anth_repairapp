@@ -1,8 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-
 import { colors , businessData , pageLinks } from '../../data';
-
 
 export default function HeaderComponent () {
     return (
@@ -17,7 +15,11 @@ export default function HeaderComponent () {
               <a href="/" className='flex items-center'>
                   <span className="sr-only"> </span>
                   
-                  <Image src='/logo_keep.jpg' width="50" height="50" className="rounded-sm"/>
+                  <Image src={ 'https://res.cloudinary.com/dezoqwmss/image/upload/v1660827619/paid_work/logo_keep_quaihm.jpg' } 
+                       width="50" 
+                      height="50"
+                   className="rounded-sm"
+                  />
                   
                   <h1 className={ "font-bold text-white px-2" }> 
                       { businessData.companyName }

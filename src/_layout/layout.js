@@ -7,8 +7,8 @@ export default function Layout({ children }) {
     return (
       <div className={ `App ${ styles.layout_container }`}>
         <Head>
-          <title> UPCV repairs windows and doors | Bristol </title>
-          <meta name="description" content="UPCV repairs windows and doors" />
+          <title> UPVC repairs windows and doors | Bristol </title>
+          <meta name="description" content="UPVC repairs windows and doors" />
           <link rel="icon" href="/favicon.ico" />
        </Head>
         <HeaderComponent />

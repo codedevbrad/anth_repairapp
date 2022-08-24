@@ -26,7 +26,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-8 flex justify-center space-x-6">
-           <Image src='/logo_full.jpg' width='170px' height='130px' />
+           <Image src='https://res.cloudinary.com/dezoqwmss/image/upload/v1660828278/paid_work/logo_full_saxzv5.jpg' width='170px' height='130px' />
         </div>    
 
         <p className="mt-8 text-center text-base text-gray-400">
