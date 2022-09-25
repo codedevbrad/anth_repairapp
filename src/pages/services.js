@@ -1,6 +1,3 @@
-import Head from 'next/head';
-import Image from 'next/image';
-
 import ComponentServiceHeading  from '../_pageComponents/services/page.component.heading';
 import ComponentServicesList    from '../_pageComponents/services/page.component.servicesAll.js';
 import ComponentPictures        from '../_pageComponents/testimonials/page.component.pictures';

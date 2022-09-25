@@ -1,14 +1,13 @@
-import { CheckIcon , NewspaperIcon, PhoneIcon, SupportIcon } from '@heroicons/react/outline';
-/* This example requires Tailwind CSS v2.0+ */
+import { CheckIcon , NewspaperIcon, PhoneIcon, SupportIcon } from '@heroicons/react/outline'; 
 import { Fragment } from 'react'
 import { Popover, Transition } from '@headlessui/react'
-import { MenuIcon, XIcon } from '@heroicons/react/outline'
+import { XIcon } from '@heroicons/react/outline'
 
 
 export default function ComponentHero () {
 
   const data = {
-     heroImage: 'https://images.unsplash.com/photo-1607400201515-c2c41c07d307?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80' , 
+     heroImage: 'https://res.cloudinary.com/dezoqwmss/image/upload/v1664114101/paid_work/company_vehicle_pybdrl.jpg' , 
   }
 
   const navigation = [

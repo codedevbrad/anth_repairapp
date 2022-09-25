@@ -1,50 +1,75 @@
-/* This example requires Tailwind CSS v2.0+ */
+import { Disclosure } from '@headlessui/react'; 
+
 const faqs = [
-  {
-    id: 1,
-    question: "What's the best thing about Switzerland?",
-    answer:
-      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
-  },
-  {
-    id: 2,
-    question: "What's the best thing about Switzerland?",
-    answer:
-      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
-  },
-  {
-    id: 3,
-    question: "What's the best thing about Switzerland?",
-    answer:
-      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
-  },
+    { 
+      question: "Do you provide free estimates",
+      answer:
+        `We provide free insurance quotations and all installations come with a manufacturer’s warranty. 
+        Naturally, we are fully insured and are happy to offer free estimates and advice to all customers 
+        whether the job is as large as a new build or as small as a single bathroom window.`
+    } , 
+    {
+      question: "would you visit my residence to make an estiate / quote free of charge" , 
+      answer: 
+        `As part of our service, we offer a free site visit to your home or property along 
+        with a quick no fuss and highly competitive quotation. If the problem isn’t an 
+        emergency we’ll arrange an appointment slot at a time convenient for you.`
+    }
 ]
+   
 
-export default function ComponentFAQS () {
+export default function ComponentHomeFAQS () {
   return (
-    <section aria-labelledby="faq-heading" className="bg-white py-10 sm:py-12">
-        <div className="max-w-xl">
-          <h2 id="faq-heading" className="text-2xl font-extrabold tracking-tight text-gray-900">
-            Frequently asked questions
-          </h2>
-          <p className="mt-4 text-base text-gray-500">
-            Questions. Frequently asked ones. Plus our answers. That's how FAQs work. If you can't find what you're
-            looking for, you can always{' '}
-            <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-              send us an email
-            </a>{' '}
-            with your enquiry.
-          </p>
-        </div>
+    <div className="bg-gray-50">
+      
+      <div className="mx-auto max-w-7xl py-12 px-4 sm:py-16 sm:px-6 lg:px-8">
 
-        <dl className="mt-12 grid grid-cols-1 gap-y-10 sm:mt-16 md:grid-cols-2 md:gap-x-6 lg:grid-cols-3">
-          {faqs.map((faq) => (
-            <div key={faq.id}>
-              <p className="text-base font-medium text-gray-900">{faq.question}</p>
-              <p className="mt-3 text-sm text-gray-500">{faq.answer}</p>
+            <h2 className="text-center text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+                Our Experties
+            </h2>
+
+            <div className="flex my-5">
+                  <p className="mr-5 leading-7">
+                          We pride ourselves on providing an exceptional, reliable, cost effective repair and installation service for 
+                          domestic and commercial customers across Bristol and Bath,
+                          Our experienced skilled technicians can repair all makes of windows, doors and conservatories and most if not all repairs 
+                          can even be carried out on the spot without needing to replace the whole window or door.
+                  </p>
+
+                  <p className='leading-7'> 
+                          Our repair vans are stocked with hundreds of fittings and we have a chain of well trusted and high quality suppliers providing an efficient service 
+                          enabling us to complete your repair work promptly and efficiently anywhere in Bristol and Bath 
+                  </p>
+            </div> 
+
+            <div className="mt-16 mx-auto max-w-3xl divide-y-2 divide-gray-200">
+                <dl className="mt-6 space-y-6 divide-y divide-gray-200">
+
+                  <h2 className="text-center text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+                     Frequently asked questions
+                  </h2>
+
+                  {faqs.map((faq) => (
+                    <Disclosure as="div" key={faq.question} className="pt-6">
+                      {({ open }) => (
+                        <>
+                          <dt className="text-lg">
+                            <Disclosure.Button className="flex w-full items-start justify-between text-left text-gray-400">
+                              <span className="font-medium text-gray-900">{faq.question} ? </span>  
+                              <span className="ml-6 flex h-7 items-center"> 
+                              </span>
+                            </Disclosure.Button>
+                          </dt>
+                          <Disclosure.Panel as="dd" className="mt-2 pr-12">
+                            <p className="text-base text-gray-500">{faq.answer}</p>
+                          </Disclosure.Panel>
+                        </>
+                      )}
+                    </Disclosure>
+                  ))}
+                </dl>
             </div>
-          ))}
-        </dl>
-    </section>
+      </div>
+    </div>
   )
 }

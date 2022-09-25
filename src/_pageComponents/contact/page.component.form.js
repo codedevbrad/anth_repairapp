@@ -257,6 +257,7 @@ class ContactForm extends React.Component {
 export default function ComponentForm( ) {
     return (
       <div className="relative bg-white">
+
         <div className="lg:absolute lg:inset-0">
           <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
             <img
@@ -266,21 +267,26 @@ export default function ComponentForm( ) {
             />
           </div>
         </div>
+
         <div className="relative py-16 px-4 sm:py-24 sm:px-6 lg:px-8 lg:max-w-7xl lg:mx-auto lg:py-32 lg:grid lg:grid-cols-2">
           <div className="lg:pr-8">
             <div className="max-w-md mx-auto sm:max-w-lg lg:mx-0">
-              <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl"> Get in contact </h2>
-              <p className="mt-4 text-lg text-gray-500 sm:mt-3">
-                Send us a message using our form or phone us on 
-                 <span className="text-blue-600 font-bold"> { businessData.contact } </span>. 
-                 We’d love to hear from you. 
-              </p>
-              
-              <ContactForm />
+
+                <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl"> 
+                    Get in contact 
+                </h2>
+
+                <p className="mt-4 text-lg text-gray-500 sm:mt-3">
+                    To get fast help and a quote for any issue with your windows, doors or conservatory send us a quick message through our website enquiry form or give us a call on 
+                    <span className="text-blue-600 font-bold"> { businessData.contact } </span> , we are here to help.
+                </p>
+                
+                <ContactForm />
 
             </div>
           </div>
         </div>
+        
       </div>
     )
   }
